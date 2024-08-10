@@ -162,11 +162,34 @@ console.log(rect2);
 
 //----------------------------------------------------------------------------------------
 //Prototypes & The Prototype Chain 05
+function Rectangle(name, width, height)
+{
+    this.name = name;
+    this.width = width;
+    this.height = height;
+    this.area = function()
+    {
+        return this.width * this.height
+    };
+}
 
+const rect = new Rectangle('Rect', 20, 10);
+console.log(Object.getOwnPropertyOf(rect))
 
 //----------------------------------------------------------------------------------------
 //Adding Methods To The Prototype 06
+function Rectangle(name, width, height)
+{
+    this.name = name;
+    this.width = width;
+    this.height = height;
+    this.area = function()
+    {
+        return this.width * this.height
+    };
+}
 
+const rect = new Rectangle('Rect', 20, 10);
 
 //----------------------------------------------------------------------------------------
 //Object.create 07
