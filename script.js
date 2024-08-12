@@ -189,15 +189,117 @@ function Rectangle(name, width, height)
     };
 }
 
+Rectangle.prototype.area = function()
+{
+    return this.width * this.height
+};
+
+Rectangle.prototype.perimeter = function()
+{
+    return 2 * (this.width + this.height);
+};
+
+Rectangle.prototype.isSquare = function()
+{
+    return this.width === this.height;
+};
+
+Rectangle.prototype.changeName = function(newName)
+{
+    return(this.name = newName);
+};
+
 const rect = new Rectangle('Rect', 20, 10);
+
+console.log(rect);
+console.log(rect.isSquare());
+console.log(rect.perimeter());
+console.log(rect.area());
+
+
 
 //----------------------------------------------------------------------------------------
 //Object.create 07
+const rectanglePrototypes =
+{
+    area: function()
+    {
+        return this.width * this.height
+    },
+    perimeter: function()
+    {
+        return 2 * (this.width + this.height)
+    },
+    isSquare: function()
+    {
+        return this.width === this.height
+    }
+};
 
+function createRectangle(name, width, height)
+{
+    return Object.create(rectanglePrototypes, {
+        height: {value: height},
+        width: {value: width},
 
+    });
+}
+
+const rect = createRectangle(20, 10);
+console.log(rect);
+console.log(rect.area());
+console.log(rect.isSquare());
+
+const rect2 = createRectangle(30, 20);
+console.log(rect2.area());
 //----------------------------------------------------------------------------------------
 //Prototypical Inheritance & call() 08
+function Shape(name)
+{
+    this.name = name;
+}
 
+function Rectangle(name, width, height)
+{
+    Shape.call(this, name);
+    this.width = width;
+    this.height = height;
+}
+
+function Circle(name, radius)
+{
+    Shapehape.call(this, name);
+    this.radius = radius;
+}
+
+Circle.prototype = Object.create(Shape.prototype);
+
+const rect = new Rectangle('Rectangle', 20, 10);
+const rect  =new Circle('Circle', 10);
 
 //----------------------------------------------------------------------------------------
 //OOP game challenge 09
+
+function Player(name)
+{
+    this.name = name;
+    this.level = 1;
+    this.points = 0;
+}
+
+Player.prototype.levelUp = function(xp)
+{
+    this.points += xp;
+    if (this.points >= 10)
+    {
+        this.lvl++;
+        this.points -= 10;
+    }
+}
+
+Player.prototype.addPoints = function()
+{
+    return '${this.name} is level ${this.lvl} with ${this.points} points';
+}
+
+const player = new Player('Rafael');
